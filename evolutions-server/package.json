@@ -1,0 +1,16 @@
+{
+    "name": "evolution-api",
+    "version": "1.0.0",
+    "description": "Esta es una API para la informacion de la evolucion de provincias de Andalucia",
+    "license": "UNLICENSED",
+    "type": "module",
+    "private": true,
+    "main": "index.js",
+    "scripts": {
+        "prestart": "npm install --only=prod",
+        "start": "node index.js"    },
+    "dependencies": {
+        "express": "^4.18.0",
+        "@oas-tools/core": "^3.0.0"
+    }
+}

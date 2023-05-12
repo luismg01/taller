@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Evolution API
+  description: Esta es una API para la informacion de la evolucion de provincias de Andalucia 
+
+paths:
+  /api/v1/evolutions:
+    x-router-controller: evolutionsController
+    get:
+      description: Returns all evolutions
+      operationId: getEvolutions
+      responses:
+        200:
+          description: Evolution list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/evolution'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/v1/evolutions/{period}:
+    x-router-controller: evolutionsController
+    get:
+      description: Returns a single evolution by its period
+      operationId: findByperiod
+      parameters:
+        - required: true
+          name: period
+          description: period of the evolution to fetch
+          in: path
+          schema:
+            type: number
+      responses:
+        200:
+          description: Evolution found by period
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/evolution'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+components:
+  schemas:
+    evolution:
+        type: object
+        required:
+          - period
+        properties:
+          period:
+            type: number
+          territory:
+            type: string
+          total_population:
+            type: number
+          man:
+            type: number
+          woman:
+            type: number
+          under_sixteen_years:
+            type: number
+          from_sixteen_to_sixty_four_years:
+            type: number
+          sixty_five_and_over:
+            type: number
+    error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+      additionalProperties: true
